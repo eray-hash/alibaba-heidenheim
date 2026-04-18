@@ -560,12 +560,72 @@
       margin-bottom: 10px;
     }
 
+    /* ── Scrollable table wrapper (all screens) ── */
+    .accordion-body { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+    /* ── Tablet ── */
+    @media (max-width: 768px) {
+      .hours-grid { grid-template-columns: 1fr 1fr; }
+      .food-showcase { height: 220px; }
+    }
+
     /* ── Mobile ── */
     @media (max-width: 520px) {
-      .menu-table th, .menu-table td { padding: 8px 10px; font-size: 0.85rem; }
-      .nr { min-width: 26px; }
-      .modal-box { padding: 24px 16px 20px; }
-      .tradition-card { padding: 28px 20px; }
+      /* Header */
+      header { padding: 28px 16px 22px; }
+      header img.logo { width: min(200px, 60vw); }
+      header h1 { font-size: 1.3rem; }
+      .header-bg-panel { filter: brightness(0.22) blur(1px); }
+
+      /* Info bar */
+      .info-bar { font-size: 0.82rem; gap: 8px 16px; padding: 10px 14px; }
+
+      /* Section titles */
+      .section-title { padding: 28px 16px 10px; }
+
+      /* Menu */
+      .menu-container { padding: 0 10px 30px; }
+      .accordion-btn { font-size: 0.93rem; padding: 14px 14px; }
+      .menu-table th, .menu-table td { padding: 8px 10px; font-size: 0.82rem; }
+      .nr { min-width: 24px; font-size: 0.76rem; }
+      .price { font-size: 0.85rem; }
+
+      /* Scans */
+      .scans-section { padding: 0 10px 40px; }
+
+      /* Hours */
+      .hours-section { padding: 0 12px 30px; }
+      .hours-grid { grid-template-columns: 1fr; gap: 8px; }
+      .hours-card { padding: 12px 16px; }
+
+      /* Contact */
+      .contact-section { padding: 0 12px 36px; gap: 12px; }
+      .contact-card { padding: 18px 16px; }
+      .maps-btn, .call-link { width: 100%; justify-content: center; }
+
+      /* Tradition */
+      .tradition-section { padding: 8px 12px 40px; }
+      .tradition-card { padding: 26px 18px; }
+      .tradition-card p { font-size: 0.93rem; }
+
+      /* Modals */
+      .modal-overlay { padding: 16px 10px; }
+      .modal-box { padding: 22px 14px 18px; }
+      .modal-box h2 { font-size: 1.1rem; }
+      .modal-box p, .modal-box li { font-size: 0.85rem; }
+
+      /* Tel button */
+      .tel-btn { font-size: 0.95rem; padding: 10px 20px; }
+
+      /* Cookie banner */
+      #cookie-banner { font-size: 0.8rem; }
+    }
+
+    /* ── Very small screens ── */
+    @media (max-width: 360px) {
+      header h1 { font-size: 1.1rem; }
+      .accordion-btn { font-size: 0.87rem; }
+      .menu-table th, .menu-table td { padding: 6px 8px; font-size: 0.78rem; }
     }
   </style>
 </head>
