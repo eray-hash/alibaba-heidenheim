@@ -138,6 +138,8 @@
     }
 
     .info-bar span { display: flex; align-items: center; gap: 6px; }
+    .info-hours { display: none; }
+    @media (min-width: 769px) { .info-hours { display: flex; } }
 
     /* ── Section titles ── */
     .section-title {
@@ -579,7 +581,6 @@
 
       /* Info bar */
       .info-bar { font-size: 0.82rem; gap: 8px 16px; padding: 10px 14px; }
-      .info-hours { display: none; }
 
       /* Section titles */
       .section-title { padding: 28px 16px 10px; }
