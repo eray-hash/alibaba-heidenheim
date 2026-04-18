@@ -392,11 +392,148 @@
     }
     .modal-close:hover { color: var(--red); }
 
+    /* ── Tel Button ── */
+    .tel-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 22px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      transition: background .2s, transform .15s;
+      box-shadow: 0 4px 16px rgba(192,57,43,0.35);
+    }
+    .tel-btn:hover { background: var(--darkred); transform: scale(1.04); }
+
+    /* ── Öffnungszeiten Section ── */
+    .hours-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+    }
+    .hours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 12px;
+    }
+    .hours-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .hours-card .day { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .hours-card .time { color: var(--red); font-size: 0.95rem; font-weight: 600; }
+
+    /* ── Kontakt & Anfahrt ── */
+    .contact-section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 16px 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 600px) { .contact-section { grid-template-columns: 1fr; } }
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+    .contact-card h3 { color: var(--red); margin-bottom: 14px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+    .contact-card p { color: var(--muted); line-height: 1.8; font-size: 0.92rem; }
+    .contact-card a.call-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+      background: var(--red);
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background .2s;
+    }
+    .contact-card a.call-link:hover { background: var(--darkred); }
+    .maps-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      background: #1a73e8;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background .2s;
+    }
+    .maps-btn:hover { background: #1557b0; }
+
+    /* ── Tradition Section ── */
+    .tradition-section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 10px 16px 60px;
+      text-align: center;
+    }
+    .tradition-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tradition-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--darkred), var(--red), var(--darkred));
+    }
+    .tradition-card .year-badge {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 900;
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    .tradition-card p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+    .tradition-card .quote-mark {
+      font-size: 4rem;
+      line-height: 0.5;
+      color: var(--red);
+      opacity: 0.3;
+      display: block;
+      margin-bottom: 10px;
+    }
+
     /* ── Mobile ── */
     @media (max-width: 520px) {
       .menu-table th, .menu-table td { padding: 8px 10px; font-size: 0.85rem; }
       .nr { min-width: 26px; }
       .modal-box { padding: 24px 16px 20px; }
+      .tradition-card { padding: 28px 20px; }
     }
   </style>
 </head>
@@ -413,7 +550,8 @@
 <header>
   <img class="logo" src="assets/logo.png" alt="Ali Baba Kebap &amp; Pizza Logo"/>
   <h1>Ali Baba – Kebap &amp; Pizza</h1>
-  <p class="tagline">Olgastraße 1 · 89518 Heidenheim an der Brenz · ☎ 07321 – 31 52 12</p>
+  <p class="tagline">Olgastraße 1 · 89518 Heidenheim an der Brenz</p>
+  <a class="tel-btn" href="tel:+4973213152​12">📞 07321 – 31 52 12</a>
 </header>
 
 <!-- ════ INFO BAR ════ -->
@@ -549,10 +687,10 @@
           <tr><td class="nr">29</td><td>Vegetarisch</td><td class="p1 price">10,50&nbsp;€</td><td class="p2 price">11,50&nbsp;€</td></tr>
           <tr><td class="nr">30</td><td>Speziale</td><td class="p1 price">10,50&nbsp;€</td><td class="p2 price">11,50&nbsp;€</td></tr>
           <tr><td class="nr">33</td><td>Ali Baba</td><td class="p1 price">11,00&nbsp;€</td><td class="p2 price">12,00&nbsp;€</td></tr>
-          <tr><td class="nr">74</td><td>Mais</td><td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
-          <tr><td class="nr">75</td><td>Pepperoni</td><td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
-          <tr><td class="nr">77</td><td>Sucuk</td><td class="p1 price">9,50&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
-          <tr><td class="nr">78</td><td>4 Käse Sorten</td><td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">72</td><td>Mais</td><td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">73</td><td>Pepperoni</td><td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">74</td><td>Sucuk</td><td class="p1 price">9,50&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">77</td><td>4 Käse Sorten</td><td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
         </tbody>
       </table>
       <p class="extra-note"><strong>Extra Zutaten:</strong> Gorgonzola, Mozzarella, Hirtenkäse, Hackfleisch, Mais, frische Tomaten, Ei, Shrimps, Knoblauch, Sucuk, Rinder-Geflügel-Kalb-Drehspieß oder Puten-Drehspieß nach Döner Kebap Art gewürzt</p>
@@ -576,7 +714,30 @@
     </div>
   </div>
 
-  <!-- 6. FALAFEL / VEGETARISCHES -->
+  <!-- 6. SALAT / SUPPE / BEILAGEN -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🥗 Salat / Suppe / Beilagen</span><span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Gericht</th><th class="price-col">Preis</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">62</td><td>Kleiner Beilagensalat</td><td class="price-col price">4,00&nbsp;€</td></tr>
+          <tr><td class="nr">63</td><td>Großer gemischter Salat</td><td class="price-col price">8,50&nbsp;€</td></tr>
+          <tr><td class="nr">64</td><td>Hirtensalat (Tomaten, Gurken, Oliven, Hirtenkäse)</td><td class="price-col price">9,00&nbsp;€</td></tr>
+          <tr><td class="nr">65</td><td>Thunfischsalat</td><td class="price-col price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">66</td><td>Mercimek Çorbası (Linsensuppe)</td><td class="price-col price">5,50&nbsp;€</td></tr>
+          <tr><td class="nr">67</td><td>Pommes Frites</td><td class="price-col price">4,50&nbsp;€</td></tr>
+          <tr><td class="nr">68</td><td>Portion Reis</td><td class="price-col price">4,50&nbsp;€</td></tr>
+          <tr><td class="nr">69</td><td>Fladenbrot</td><td class="price-col price">1,00&nbsp;€</td></tr>
+        </tbody>
+      </table>
+      <p class="extra-note">⚠️ Bitte Preise und Nummern anhand der aktuellen Speisekarte überprüfen.</p>
+    </div>
+  </div>
+
+  <!-- 7. FALAFEL / VEGETARISCHES -->
   <div class="accordion-item">
     <button class="accordion-btn" onclick="toggle(this)">
       <span>🧆 Falafel / Vegetarisches</span><span class="icon">+</span>
@@ -661,6 +822,71 @@
       <img src="assets/speisekarte_seite1.jpg?v=5" alt="Speisekarte Seite 1" onclick="openLightbox(this.src)"/>
       <p>Seite 2 – zum Vergrößern klicken</p>
     </div>
+  </div>
+</div>
+
+<!-- ════ ÖFFNUNGSZEITEN ════ -->
+<p class="section-title">Öffnungszeiten</p>
+<div class="section-divider"></div>
+
+<div class="hours-section">
+  <div class="hours-grid">
+    <div class="hours-card">
+      <div class="day">Montag – Donnerstag</div>
+      <div class="time">10:30 – 22:00 Uhr</div>
+    </div>
+    <div class="hours-card">
+      <div class="day">Freitag – Samstag</div>
+      <div class="time">10:30 – 00:00 Uhr</div>
+    </div>
+    <div class="hours-card">
+      <div class="day">Sonntag</div>
+      <div class="time">12:00 – 22:00 Uhr</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ KONTAKT & ANFAHRT ════ -->
+<p class="section-title">Kontakt &amp; Anfahrt</p>
+<div class="section-divider"></div>
+
+<div class="contact-section">
+  <div class="contact-card">
+    <h3>📍 Adresse</h3>
+    <p>
+      <strong style="color:var(--text);">Ali Baba – Kebap &amp; Pizza</strong><br/>
+      Olgastraße 1<br/>
+      89518 Heidenheim an der Brenz
+    </p>
+    <a class="maps-btn" href="https://www.google.com/maps/search/?api=1&query=Olgastra%C3%9Fe+1+89518+Heidenheim+an+der+Brenz" target="_blank" rel="noopener noreferrer">
+      🗺️ In Google Maps öffnen
+    </a>
+  </div>
+  <div class="contact-card">
+    <h3>📞 Telefon</h3>
+    <p>
+      Bestellen Sie telefonisch oder fragen Sie nach Tischreservierungen und Vorbestellungen für Gruppen.
+    </p>
+    <a class="call-link" href="tel:+497321315212">📞 07321 – 31 52 12</a>
+  </div>
+</div>
+
+<!-- ════ TRADITION ════ -->
+<p class="section-title">Seit 1997 für Sie da</p>
+<div class="section-divider"></div>
+
+<div class="tradition-section">
+  <div class="tradition-card">
+    <span class="quote-mark">"</span>
+    <div class="year-badge">Seit 1997</div>
+    <p>
+      Was als kleine Leidenschaft für authentische türkische Küche begann, ist heute eine feste Institution in Heidenheim an der Brenz.
+      Seit fast drei Jahrzehnten verwöhnen wir unsere Gäste mit handgemachten Speisen, frischen Zutaten und dem Herzblut,
+      das jede gute Küche ausmacht. Ob der knusprige Döner Kebap, die dünn ausgerollte Pide oder die saftige Pizza aus dem Steinofen –
+      bei Ali Baba schmeckt man die Tradition in jedem Bissen.
+      <br/><br/>
+      Wir freuen uns, Sie bei uns begrüßen zu dürfen.
+    </p>
   </div>
 </div>
 
