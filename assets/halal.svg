@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <path id="top-arc" d="M 24,100 A 76,76 0 1,1 176,100"/>
+    <path id="bot-arc" d="M 38,130 A 64,64 0 0,0 162,130"/>
+    <style>
+      text { font-family: Georgia, serif; }
+    </style>
+  </defs>
+
+  <!-- Scalloped outer badge -->
+  <g fill="#2d6a2d">
+    <!-- Main circle -->
+    <circle cx="100" cy="100" r="97"/>
+    <!-- Scallop bumps (24 bumps) -->
+    <g>
+      <circle cx="100" cy="3"   r="8"/>
+      <circle cx="141" cy="14"  r="8"/>
+      <circle cx="172" cy="45"  r="8"/>
+      <circle cx="183" cy="85"  r="8"/>
+      <circle cx="183" cy="115" r="8"/>
+      <circle cx="172" cy="155" r="8"/>
+      <circle cx="141" cy="186" r="8"/>
+      <circle cx="100" cy="197" r="8"/>
+      <circle cx="59"  cy="186" r="8"/>
+      <circle cx="28"  cy="155" r="8"/>
+      <circle cx="17"  cy="115" r="8"/>
+      <circle cx="17"  cy="85"  r="8"/>
+      <circle cx="28"  cy="45"  r="8"/>
+      <circle cx="59"  cy="14"  r="8"/>
+      <!-- Diagonal bumps -->
+      <circle cx="125" cy="6"   r="8"/>
+      <circle cx="156" cy="26"  r="8"/>
+      <circle cx="180" cy="56"  r="8"/>
+      <circle cx="183" cy="100" r="8"/>
+      <circle cx="180" cy="144" r="8"/>
+      <circle cx="156" cy="174" r="8"/>
+      <circle cx="125" cy="194" r="8"/>
+      <circle cx="75"  cy="194" r="8"/>
+      <circle cx="44"  cy="174" r="8"/>
+      <circle cx="20"  cy="144" r="8"/>
+      <circle cx="17"  cy="100" r="8"/>
+      <circle cx="20"  cy="56"  r="8"/>
+      <circle cx="44"  cy="26"  r="8"/>
+      <circle cx="75"  cy="6"   r="8"/>
+    </g>
+  </g>
+
+  <!-- Inner dark green fill -->
+  <circle cx="100" cy="100" r="88" fill="#1e4d1e"/>
+
+  <!-- Outer white ring -->
+  <circle cx="100" cy="100" r="86" fill="none" stroke="white" stroke-width="2.5"/>
+  <!-- Inner white ring -->
+  <circle cx="100" cy="100" r="75" fill="none" stroke="white" stroke-width="2"/>
+
+  <!-- "HALAL FOOD CERTIFIED" curved top text -->
+  <text font-size="11" font-weight="700" fill="white" letter-spacing="2.8">
+    <textPath href="#top-arc" startOffset="50%" text-anchor="middle">HALAL FOOD CERTIFIED</textPath>
+  </text>
+
+  <!-- Arabic حلال -->
+  <text x="100" y="110" text-anchor="middle"
+        font-family="'Arial Unicode MS','Noto Naskh Arabic',serif"
+        font-size="44" font-weight="bold" fill="white">حلال</text>
+
+  <!-- HALAL -->
+  <text x="100" y="130" text-anchor="middle"
+        font-family="Georgia,serif"
+        font-size="15" font-weight="700" letter-spacing="3" fill="white">HALAL</text>
+
+  <!-- Stars row -->
+  <text x="100" y="152" text-anchor="middle" font-size="10" fill="white" letter-spacing="6">★ ★ ★</text>
+
+  <!-- 100% curved bottom text -->
+  <text font-size="12" font-weight="700" fill="white" letter-spacing="2">
+    <textPath href="#bot-arc" startOffset="50%" text-anchor="middle">100%</textPath>
+  </text>
+</svg>
