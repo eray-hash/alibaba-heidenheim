@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&amp;display=swap');
+    </style>
+    <!-- Arc path for "Kebap & Pizza" bottom text -->
+    <path id="kebap-arc" d="M 88,352 A 188,188 0 0,1 412,352"/>
+    <clipPath id="logo-clip">
+      <circle cx="250" cy="250" r="232"/>
+    </clipPath>
+  </defs>
+
+  <!-- ═══ BACKGROUND CIRCLE ═══ -->
+  <circle cx="250" cy="250" r="247" fill="#0d0d0d"/>
+  <circle cx="250" cy="250" r="235" fill="#111111"/>
+
+  <!-- ═══ OUTER BORDER ═══ -->
+  <circle cx="250" cy="250" r="233" fill="none" stroke="white" stroke-width="2.5"/>
+
+  <!-- ═══ INNER ARC BORDER (lower half only) ═══ -->
+  <path d="M 82,353 A 192,192 0 0,0 418,353"
+        fill="none" stroke="white" stroke-width="1.5"/>
+
+  <!-- ═══ RED ACCENT ARCS (left & right) ═══ -->
+  <path d="M 28,190 A 233,233 0 0,0 28,318"
+        fill="none" stroke="#c0392b" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 472,190 A 233,233 0 0,1 472,318"
+        fill="none" stroke="#c0392b" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- ═══ FORK (upper-left area, 4 tines) ═══ -->
+  <g transform="translate(158,48)" fill="white">
+    <!-- Tine 1 -->
+    <rect x="-18" y="0"  width="7" height="98" rx="3.5"/>
+    <!-- Tine 2 -->
+    <rect x="-7"  y="0"  width="7" height="98" rx="3.5"/>
+    <!-- Tine 3 -->
+    <rect x="4"   y="0"  width="7" height="98" rx="3.5"/>
+    <!-- Tine 4 -->
+    <rect x="15"  y="0"  width="7" height="98" rx="3.5"/>
+    <!-- Tine base connector -->
+    <rect x="-18" y="90" width="40" height="12" rx="4"/>
+    <!-- Neck -->
+    <rect x="-6"  y="100" width="12" height="18" rx="4"/>
+    <!-- Handle -->
+    <rect x="-6.5" y="116" width="13" height="148" rx="6.5"/>
+  </g>
+
+  <!-- ═══ SPOON (right of fork) ═══ -->
+  <g transform="translate(210,48)" fill="white">
+    <!-- Bowl -->
+    <ellipse cx="0" cy="24" rx="18" ry="25"/>
+    <!-- Neck taper -->
+    <path d="M -5,46 Q -3,67 0,70 Q 3,67 5,46 Z"/>
+    <!-- Handle -->
+    <rect x="-6.5" y="68" width="13" height="148" rx="6.5"/>
+  </g>
+
+  <!-- ═══ CHEF HAT (upper-right) ═══ -->
+  <!-- Positioned so brim bottom sits around y=130 -->
+  <g transform="translate(282,14)" fill="white">
+    <!-- Left dome bubble -->
+    <circle cx="17"  cy="78" r="38"/>
+    <!-- Right dome bubble -->
+    <circle cx="95"  cy="70" r="38"/>
+    <!-- Centre dome bubble (tallest) -->
+    <circle cx="56"  cy="50" r="48"/>
+    <!-- Fill gap between bubbles and brim -->
+    <rect x="3"   y="74"  width="107" height="42"/>
+    <!-- Hat brim / band -->
+    <rect x="-4"  y="108" width="122" height="26" rx="5"/>
+    <!-- Thin dark line on brim top for definition -->
+    <rect x="-4"  y="108" width="122" height="4"  rx="2" fill="#333"/>
+  </g>
+
+  <!-- ═══ "Ali Bab'a" MAIN SCRIPT TEXT ═══ -->
+  <text
+    font-family="'Great Vibes','Brush Script MT','Apple Chancery',cursive"
+    font-size="112"
+    fill="white"
+    x="252" y="298"
+    text-anchor="middle"
+    transform="rotate(-4,252,298)">Ali Bab&#39;a</text>
+
+  <!-- ═══ RED SWOOSH ═══ -->
+  <!-- Dark shadow for depth -->
+  <path d="M 48,324 Q 252,368 456,324"
+        fill="none" stroke="#7a0000" stroke-width="6" stroke-linecap="round"/>
+  <!-- Main swoosh -->
+  <path d="M 48,321 Q 252,363 456,321"
+        fill="none" stroke="#c0392b" stroke-width="13" stroke-linecap="round"/>
+
+  <!-- ═══ "Kebap & Pizza" CURVED TEXT ═══ -->
+  <text font-family="Georgia,'Times New Roman',serif"
+        font-size="27" fill="white" letter-spacing="3">
+    <textPath href="#kebap-arc" startOffset="50%" text-anchor="middle">Kebap &amp; Pizza</textPath>
+  </text>
+
+</svg>

@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ali Bab'a – Kebap &amp; Pizza Heidenheim</title>
+  <meta name="description" content="Ali Bab'a Kebap &amp; Pizza in Heidenheim an der Brenz – Olgastraße 1. Halal. Jetzt online die Speisekarte entdecken."/>
+  <meta name="keywords" content="Ali Baba, Kebap, Pizza, Heidenheim, Döner, Halal, Olgastraße"/>
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #c0392b;
+      --darkred:#8B0000;
+      --bg:     #1e1e1e;
+      --card:   #2b2b2b;
+      --border: #3a3a3a;
+      --text:   #f0f0f0;
+      --muted:  #aaa;
+      --accent: #e74c3c;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── Cookie Banner ── */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #111;
+      border-top: 2px solid var(--red);
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 9999;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    #cookie-banner a { color: var(--red); text-decoration: underline; cursor: pointer; }
+    #cookie-banner button {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 8px 22px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #cookie-banner button:hover { background: var(--darkred); }
+    #cookie-banner.hidden { display: none; }
+
+    /* ── Header ── */
+    header {
+      background: var(--card);
+      text-align: center;
+      padding: 36px 20px 28px;
+      border-bottom: 3px solid var(--red);
+    }
+
+    header img.logo {
+      width: min(300px, 72vw);
+      height: auto;
+      display: block;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      box-shadow: 0 0 32px rgba(192,57,43,0.4);
+    }
+
+    header h1 {
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    header p.tagline {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    /* ── Info Bar ── */
+    .info-bar {
+      background: var(--red);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 32px;
+      padding: 12px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .info-bar span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── Section titles ── */
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 700;
+      color: var(--red);
+      padding: 40px 20px 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .section-divider {
+      width: 60px; height: 3px;
+      background: var(--red);
+      margin: 0 auto 32px;
+      border-radius: 2px;
+    }
+
+    /* ── Menu Container ── */
+    .menu-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 16px 40px;
+    }
+
+    /* ── Accordion ── */
+    .accordion-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+
+    .accordion-item:hover {
+      box-shadow: 0 0 0 2px var(--darkred);
+    }
+
+    .accordion-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 16px 20px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      letter-spacing: .5px;
+      transition: background .2s;
+    }
+
+    .accordion-btn:hover { background: rgba(192,57,43,0.12); }
+
+    .accordion-btn.active {
+      background: rgba(192,57,43,0.18);
+      color: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-btn .icon {
+      font-size: 1.2rem;
+      transition: transform .3s;
+      color: var(--red);
+      flex-shrink: 0;
+    }
+
+    .accordion-btn.active .icon { transform: rotate(45deg); }
+
+    .accordion-body {
+      display: none;
+      padding: 0;
+    }
+
+    .accordion-body.open { display: block; }
+
+    /* ── Menu Table ── */
+    .menu-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .menu-table thead tr {
+      background: rgba(192,57,43,0.2);
+    }
+
+    .menu-table th {
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-align: left;
+    }
+
+    .menu-table th:last-child,
+    .menu-table td:last-child { text-align: right; }
+
+    .menu-table td {
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.92rem;
+      vertical-align: top;
+    }
+
+    .menu-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+    .menu-table tr:hover td { background: rgba(192,57,43,0.07); }
+
+    .nr { color: var(--muted); font-size: 0.82rem; min-width: 36px; }
+    .price { color: #fff; font-weight: 700; white-space: nowrap; }
+    .price-col { white-space: nowrap; }
+
+    .menu-table th.p1, .menu-table td.p1,
+    .menu-table th.p2, .menu-table td.p2 {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .menu-table th.pk, .menu-table td.pk { text-align: right; white-space: nowrap; }
+
+    .dash { color: var(--muted); }
+
+    .extra-note {
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-style: italic;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 6px;
+      padding: 14px 16px;
+    }
+
+    .info-item {
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .info-item b { color: var(--text); margin-right: 6px; }
+
+    .zusatz-list {
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+      gap: 6px;
+    }
+
+    .zusatz-item { font-size: 0.84rem; color: var(--muted); }
+    .zusatz-item b { color: var(--text); }
+
+    /* ── Scans Section ── */
+    .scans-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    .scans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .scan-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .scan-card p {
+      padding: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .scan-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform .3s;
+      cursor: zoom-in;
+    }
+
+    .scan-card img:hover { transform: scale(1.02); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--card);
+      border-top: 3px solid var(--red);
+      text-align: center;
+      padding: 30px 20px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer a { color: var(--red); text-decoration: none; cursor: pointer; }
+    footer a:hover { text-decoration: underline; }
+    footer strong { color: var(--text); }
+    .footer-links { margin-top: 14px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      cursor: zoom-out;
+    }
+
+    #lightbox.show { display: flex; }
+    #lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; }
+
+    /* ── Modal (Impressum / Datenschutz) ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 2000;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 16px;
+      overflow-y: auto;
+    }
+    .modal-overlay.show { display: flex; }
+
+    .modal-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      padding: 32px 28px 28px;
+      position: relative;
+      margin: auto;
+    }
+
+    .modal-box h2 {
+      color: var(--red);
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-box h3 {
+      color: var(--text);
+      font-size: 1rem;
+      margin: 18px 0 6px;
+    }
+
+    .modal-box p, .modal-box li {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    .modal-box ul { padding-left: 20px; margin-bottom: 10px; }
+
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.6rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--red); }
+
+    /* ── Mobile ── */
+    @media (max-width: 520px) {
+      .menu-table th, .menu-table td { padding: 8px 10px; font-size: 0.85rem; }
+      .nr { min-width: 26px; }
+      .modal-box { padding: 24px 16px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════ COOKIE BANNER ════ -->
+<div id="cookie-banner">
+  <span>🍪 Diese Website verwendet <strong>keine Tracking-Cookies</strong> und erhebt keine personenbezogenen Daten. Serverprotokolle (IP, Zeitstempel) werden von GitHub Pages verarbeitet.
+  Mehr in unserer <a onclick="openModal('datenschutz')">Datenschutzerklärung</a>.</span>
+  <button onclick="dismissCookie()">Verstanden</button>
+</div>
+
+<!-- ════ HEADER ════ -->
+<header>
+  <img class="logo" src="assets/logo.png" alt="Ali Bab'a Kebap &amp; Pizza Logo"/>
+  <h1>Ali Bab'a – Kebap &amp; Pizza</h1>
+  <p class="tagline">Olgastraße 1 · 89518 Heidenheim an der Brenz · ☎ 07321 – 31 52 12</p>
+</header>
+
+<!-- ════ INFO BAR ════ -->
+<div class="info-bar">
+  <span>🕐 Mo–Do: 10:30–22:00 Uhr</span>
+  <span>🕐 Fr–Sa: 10:30–00:00 Uhr</span>
+  <span>🕐 So: 12:00–22:00 Uhr</span>
+  <span>✅ Halal</span>
+  <span>📞 Vorbestellung möglich</span>
+</div>
+
+<!-- ════ SPEISEKARTE ════ -->
+<p class="section-title">Speisekarte</p>
+<div class="section-divider"></div>
+
+<div class="menu-container">
+
+  <!-- 1. ALKOHOLFREIE GETRÄNKE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🥤 Alkoholfreie Getränke</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th>Getränk</th><th class="p1">0,33l</th><th class="p2">0,5l</th></tr></thead>
+        <tbody>
+          <tr><td>Coca-Cola</td>           <td class="p1 price">2,50&nbsp;€</td><td class="p2 price">3,00&nbsp;€</td></tr>
+          <tr><td>Fanta / Sprite</td>      <td class="p1 price">2,50&nbsp;€</td><td class="p2 price">3,00&nbsp;€</td></tr>
+          <tr><td>Tafelwasser</td>         <td class="p1 price">2,00&nbsp;€</td><td class="p2 price">3,50&nbsp;€</td></tr>
+          <tr><td>Eistee (Zitrone / Pfirsich)</td><td class="p1 price">2,50&nbsp;€</td><td class="p2 price">3,00&nbsp;€</td></tr>
+          <tr><td>Ayran (türk. Joghurtgetränk)</td><td class="p1 price">2,00&nbsp;€</td><td class="p2 price">3,50&nbsp;€</td></tr>
+          <tr><td>Orangensaft / Apfelsaft / Kirschnektar</td><td class="p1 price">2,50&nbsp;€</td><td class="p2 price">3,00&nbsp;€</td></tr>
+          <tr><td>Maracuja Nektar</td>     <td class="p1 price">2,50&nbsp;€</td><td class="p2 price">3,00&nbsp;€</td></tr>
+          <tr><td>Saft Schorle</td>        <td class="p1 price">2,50&nbsp;€</td><td class="p2 price">3,00&nbsp;€</td></tr>
+          <tr><td>Tee (versch. Sorten)</td><td class="p1 price">1,50&nbsp;€</td><td class="p2 price">2,00&nbsp;€</td></tr>
+          <tr><td>Çay (türkischer Schwarztee)</td><td class="p1 price">1,50&nbsp;€</td><td class="p2 price">2,00&nbsp;€</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. ALKOHOLISCHE GETRÄNKE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🍺 Alkoholische Getränke / Bier</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th>Getränk</th><th class="p1">0,33l</th><th class="p2">0,5l</th></tr></thead>
+        <tbody>
+          <tr><td>Edelpils</td>          <td class="p1 price">4,00&nbsp;€</td><td class="p2 dash">–</td></tr>
+          <tr><td>Spezial</td>           <td class="p1 dash">–</td><td class="p2 price">3,50&nbsp;€</td></tr>
+          <tr><td>Weizen Kristallklar</td><td class="p1 dash">–</td><td class="p2 price">3,50&nbsp;€</td></tr>
+          <tr><td>Hefeweizen</td>        <td class="p1 dash">–</td><td class="p2 price">3,50&nbsp;€</td></tr>
+          <tr><td>Alkoholfreies Bier</td><td class="p1 dash">–</td><td class="p2 price">3,50&nbsp;€</td></tr>
+          <tr><td>Radler</td>            <td class="p1 dash">–</td><td class="p2 price">3,50&nbsp;€</td></tr>
+          <tr><td>Desperados</td>        <td class="p1 price">4,00&nbsp;€</td><td class="p2 dash">–</td></tr>
+          <tr><td>Efes Pilsen</td>       <td class="p1 price">3,50&nbsp;€</td><td class="p2 dash">–</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3. PIZZEN -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🍕 Pizzen</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Pizza</th><th class="p1">26cm</th><th class="p2">29cm</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">01</td><td>Margherita</td>                                    <td class="p1 price">7,00&nbsp;€</td><td class="p2 price">8,50&nbsp;€</td></tr>
+          <tr><td class="nr">02</td><td>Rindersalami</td>                                  <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">03</td><td>Putenschinken</td>                                 <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">04</td><td>Champignon</td>                                    <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">05</td><td>Paprika</td>                                       <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">06</td><td>Artischocke</td>                                   <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">07</td><td>Sardelle</td>                                      <td class="p1 price">9,00&nbsp;€</td><td class="p2 price">10,00&nbsp;€</td></tr>
+          <tr><td class="nr">08</td><td>Thunfisch</td>                                     <td class="p1 price">9,50&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">09</td><td>Knoblauch &amp; Zwiebel</td>                       <td class="p1 price">9,50&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">10</td><td>Meeresfrüchte</td>                                 <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">11</td><td>Shrimps</td>                                       <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">12</td><td>Hawaii (Putenschinken, Ananas)</td>                <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">13</td><td>Vier Jahreszeiten</td>                             <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">14</td><td>Putenschinken &amp; Champignon</td>                <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">15</td><td>Putenschinken &amp; Rindersalami</td>              <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">16</td><td>Rindersalami &amp; Champignon</td>                 <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">17</td><td>Rindersalami &amp; Paprika</td>                    <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">18</td><td>Champignon &amp; Paprika</td>                      <td class="p1 price">9,50&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">19</td><td>Paprika &amp; Artischocke</td>                     <td class="p1 price">9,50&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">20</td><td>Sardellen, Oliven, Ei</td>                         <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">21</td><td>Thunfisch, Zwiebel, Oliven</td>                    <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">22</td><td>Hackfleisch, Ei, Peperoni</td>                     <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">23</td><td>Mafia (Rindersalami, Knoblauch, Zwiebel)</td>     <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">24</td><td>Italia (Spinat, Paprika, Ei)</td>                  <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">25</td><td>Spinaci (Spinat, Shrimps, Knoblauch)</td>          <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">26</td><td>Putenschinken</td>                                 <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">27</td><td>Gemischt</td>                                      <td class="p1 price">10,50&nbsp;€</td><td class="p2 price">11,50&nbsp;€</td></tr>
+          <tr><td class="nr">28</td><td>Pepperoni</td>                                     <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">29</td><td>Vegetarisch</td>                                   <td class="p1 price">10,50&nbsp;€</td><td class="p2 price">11,50&nbsp;€</td></tr>
+          <tr><td class="nr">30</td><td>Speziale</td>                                      <td class="p1 price">10,50&nbsp;€</td><td class="p2 price">11,50&nbsp;€</td></tr>
+          <tr><td class="nr">33</td><td>Ali Baba</td>                                      <td class="p1 price">11,00&nbsp;€</td><td class="p2 price">12,00&nbsp;€</td></tr>
+          <tr><td class="nr">74</td><td>Mais</td>                                          <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">75</td><td>Pepperoni</td>                                     <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">77</td><td>Sucuk</td>                                         <td class="p1 price">9,50&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">78</td><td>4 Käse Sorten</td>                                 <td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+        </tbody>
+      </table>
+      <p class="extra-note"><strong>Extra Zutaten:</strong> Gorgonzola, Mozzarella, Hirtenkäse, Hackfleisch, Mais, frische Tomaten, Ei, Shrimps, Knoblauch, Sucuk, Rinder-Geflügel-Kalb-Drehspieß oder Puten-Drehspieß nach Döner Kebap Art gewürzt</p>
+    </div>
+  </div>
+
+  <!-- 4. CALZONE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🥙 Calzone</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Calzone</th><th class="p1">26cm</th><th class="p2">29cm</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">31</td><td>Calzone (Putenschinken, Champignons, Rindersalami)</td><td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">32</td><td>Calzone (Rinder-Geflügel-Kalb-Drehspieß oder Puten-Drehspieß nach Döner Kebap Art gewürzt, Zwiebel, Frische Tomate)</td><td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">76</td><td>Calzone Vegetarisch (Champignons, Paprika, Zwiebel)</td><td class="p1 price">10,00&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5. PIDE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🫓 Pide</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Pide</th><th class="p1">Klein</th><th class="p2">Normal</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">47</td><td>Etli Ekmek</td>                                                                                   <td class="p1 price">9,00&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">48</td><td>Mevlana Pide (mit Hackfleisch und Hirtenkäse)</td>                                               <td class="p1 price">9,00&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">49</td><td>Pide mit Hackfleisch und Ei</td>                                                                  <td class="p1 price">9,00&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">50</td><td>Pide mit Spinat, Hirnenkäse und Ei</td>                                                          <td class="p1 price">9,00&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">51</td><td>Pide mit Rinder-Geflügel-Kalb-Drehspieß oder Puten-Drehspieß nach Döner Kebap Art gewürzt</td>  <td class="p1 price">9,00&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">52</td><td>Pide mit Hirtenkäse und Ei</td>                                                                  <td class="p1 price">8,50&nbsp;€</td><td class="p2 price">10,00&nbsp;€</td></tr>
+          <tr><td class="nr">78</td><td>Pide mit Sucuk, Hirtenkäse und Ei</td>                                                           <td class="p1 price">9,00&nbsp;€</td><td class="p2 price">10,50&nbsp;€</td></tr>
+          <tr><td class="nr">79</td><td>Pide Vegetarisch (Tomaten, Hirtenkäse, Zwiebel, Champignons, Peperoni)</td>                      <td class="p1 price">9,50&nbsp;€</td><td class="p2 price">11,00&nbsp;€</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 6. DÖNER KEBAP ART -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🌯 Döner Kebap Art</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Gericht</th><th class="pk">Kalb</th><th class="pk">Puten</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">34</td><td>Normal Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td>        <td class="pk price">7,50&nbsp;€</td><td class="pk price">7,50&nbsp;€</td></tr>
+          <tr><td class="nr">35</td><td>Klein Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td>         <td class="pk price">6,50&nbsp;€</td><td class="pk price">6,50&nbsp;€</td></tr>
+          <tr><td class="nr">36</td><td>Jumbo Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td>         <td class="pk price">9,00&nbsp;€</td><td class="pk price">9,00&nbsp;€</td></tr>
+          <tr><td class="nr">37</td><td>Box Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td>           <td class="pk price">7,50&nbsp;€</td><td class="pk price">7,50&nbsp;€</td></tr>
+          <tr><td class="nr">38</td><td>Dürüm Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td>         <td class="pk price">8,00&nbsp;€</td><td class="pk price">8,00&nbsp;€</td></tr>
+          <tr><td class="nr">39</td><td>Lahmacun (türkische Pizza)</td>                                                                     <td class="pk price">6,50&nbsp;€</td><td class="pk price">6,50&nbsp;€</td></tr>
+          <tr><td class="nr">40</td><td>Lahmacun Teller (türkische Pizza)</td>                                                              <td class="pk price">9,00&nbsp;€</td><td class="pk price">9,00&nbsp;€</td></tr>
+          <tr><td class="nr">41</td><td>Lahmacun Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td>      <td class="pk price">11,00&nbsp;€</td><td class="pk price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">42</td><td>Lahmacun Teller Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td><td class="pk price">11,00&nbsp;€</td><td class="pk price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">43</td><td>Peynirli (Fladen mit Käse und Salat)</td>                                                           <td class="pk price">6,00&nbsp;€</td><td class="pk price">6,00&nbsp;€</td></tr>
+          <tr><td class="nr">44</td><td>Salatali (Fladenbrot mit Salat)</td>                                                                <td class="pk price">5,50&nbsp;€</td><td class="pk price">5,50&nbsp;€</td></tr>
+          <tr><td class="nr">45</td><td>Mercimek Corbasi</td>                                                                               <td class="pk price">5,50&nbsp;€</td><td class="pk price">5,50&nbsp;€</td></tr>
+          <tr><td class="nr">46</td><td>Fladenbrot</td>                                                                                     <td class="pk price">1,00&nbsp;€</td><td class="pk price">1,00&nbsp;€</td></tr>
+          <tr><td class="nr">87</td><td>Yufka Drehspieß mit Pommes, Salat und Soße</td>                                                     <td class="pk price">8,50&nbsp;€</td><td class="pk price">8,50&nbsp;€</td></tr>
+          <tr><td class="nr">89</td><td>BOWL Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt</td>          <td class="pk price">9,50&nbsp;€</td><td class="pk price">9,50&nbsp;€</td></tr>
+          <tr><td class="nr">95</td><td>Drehspieß mit Pommes, Salat und Soße</td>                                                           <td class="pk price">8,00&nbsp;€</td><td class="pk price">8,00&nbsp;€</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 7. TELLER-GERICHTE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🍽️ Teller-Gerichte / Grill-Gerichte</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Gericht</th><th class="p1">Klein</th><th class="p2">Normal</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">53</td><td>Döner Teller (mit Salat, Reis oder Pommes und Fladenbrot, Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt)</td><td class="p1 price">11,00&nbsp;€</td><td class="p2 price">12,50&nbsp;€</td></tr>
+          <tr><td class="nr">54</td><td>Iskender (mit Joghurt, Tomatensoße und klein geschnittenem Fladenbrot, Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt)</td><td class="p1 price">11,00&nbsp;€</td><td class="p2 price">12,50&nbsp;€</td></tr>
+          <tr><td class="nr">55</td><td>Dürüm Iskender (Rinder-Geflügel-Kalb Drehspieß oder Puten Drehspieß nach Döner Kebap Art gewürzt)</td><td class="p1 dash">–</td><td class="p2 price">12,50&nbsp;€</td></tr>
+          <tr><td class="nr">56</td><td>Chicken Nuggets Dürüm mit Pommes und Gemüse</td><td class="p1 dash">–</td><td class="p2 price">8,00&nbsp;€</td></tr>
+          <tr><td class="nr">57</td><td>Nudel Teller</td>                               <td class="p1 dash">–</td><td class="p2 price">12,50&nbsp;€</td></tr>
+          <tr><td class="nr">58</td><td>Nudelauflauf</td>                               <td class="p1 dash">–</td><td class="p2 price">12,50&nbsp;€</td></tr>
+          <tr><td class="nr">59</td><td>Pommes</td>                                     <td class="p1 dash">–</td><td class="p2 price">4,50&nbsp;€</td></tr>
+          <tr><td class="nr">60</td><td>Portion Reis</td>                               <td class="p1 dash">–</td><td class="p2 price">4,50&nbsp;€</td></tr>
+          <tr><td class="nr">61</td><td>Cacik</td>                                      <td class="p1 dash">–</td><td class="p2 price">5,50&nbsp;€</td></tr>
+          <tr><td class="nr">90</td><td>Schnitzel Teller</td>                           <td class="p1 dash">–</td><td class="p2 price">12,50&nbsp;€</td></tr>
+          <tr><td class="nr">93</td><td>Chicken Nuggets Bowl mit Pommes oder Reis</td> <td class="p1 dash">–</td><td class="p2 price">8,00&nbsp;€</td></tr>
+          <tr><td class="nr">94</td><td>Chicken Nuggets Teller mit Pommes oder Reis und Salat</td><td class="p1 dash">–</td><td class="p2 price">12,00&nbsp;€</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 8. SALAT / SUPPE / BEILAGE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🥗 Salat / Suppe / Beilage</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Gericht</th><th class="price-col">Preis</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">44</td><td>Grüner Salat oder Gurkensalat</td>    <td class="price-col price">4,50&nbsp;€</td></tr>
+          <tr><td class="nr">65</td><td>Tomatensalat oder Gemischter Salat</td><td class="price-col price">6,00&nbsp;€</td></tr>
+          <tr><td class="nr">66</td><td>Hirtensalat</td>                       <td class="price-col price">7,00&nbsp;€</td></tr>
+          <tr><td class="nr">67</td><td>Nizza Salat</td>                       <td class="price-col price">7,50&nbsp;€</td></tr>
+          <tr><td class="nr">68</td><td>Tomaten-Mozzarella Salat</td>          <td class="price-col price">7,50&nbsp;€</td></tr>
+          <tr><td class="nr">69</td><td>Salat mit Kalb Drehspieß</td>          <td class="price-col price">8,50&nbsp;€</td></tr>
+          <tr><td class="nr">70</td><td>Hawaii Salat</td>                      <td class="price-col price">7,50&nbsp;€</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 9. FALAFEL / VEGETARISCHES -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>🧆 Falafel / Vegetarisches</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <table class="menu-table">
+        <thead><tr><th class="nr">Nr.</th><th>Gericht</th><th class="price-col">Preis</th></tr></thead>
+        <tbody>
+          <tr><td class="nr">81</td><td>Falafel im Brot</td>                                                 <td class="price-col price">7,50&nbsp;€</td></tr>
+          <tr><td class="nr">82</td><td>Falafel Dürüm</td>                                                   <td class="price-col price">8,00&nbsp;€</td></tr>
+          <tr><td class="nr">83</td><td>Falafel Teller (mit Salat, Pommes oder Reis und Soße)</td>           <td class="price-col price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">84</td><td>Ketchup oder Mayonnaise</td>                                         <td class="price-col price">0,50&nbsp;€</td></tr>
+          <tr><td class="nr">85</td><td>Nohut Dürüm (mit Gemüse und Kichererbsen)</td>                      <td class="price-col price">8,00&nbsp;€</td></tr>
+          <tr><td class="nr">86</td><td>Nohut Teller (mit Salat und Reis)</td>                               <td class="price-col price">11,00&nbsp;€</td></tr>
+          <tr><td class="nr">92</td><td>Halloumi im Brot</td>                                                <td class="price-col price">7,50&nbsp;€</td></tr>
+          <tr><td class="nr">93</td><td>Halloumi im Yufka</td>                                               <td class="price-col price">8,00&nbsp;€</td></tr>
+          <tr><td class="nr">94</td><td>Vegetarischer Teller mit Salat (Beilage nach Wahl – Pommes, Reis, etc.)</td><td class="price-col price">9,50&nbsp;€</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 10. ZUSATZSTOFFE & ALLERGENE -->
+  <div class="accordion-item">
+    <button class="accordion-btn" onclick="toggle(this)">
+      <span>ℹ️ Zusatzstoffe &amp; Allergene</span>
+      <span class="icon">+</span>
+    </button>
+    <div class="accordion-body">
+      <p style="padding:12px 16px 4px;font-size:0.85rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Zusatzstoffe</p>
+      <div class="zusatz-list">
+        <div class="zusatz-item"><b>1.</b> mit Süßungsmittel</div>
+        <div class="zusatz-item"><b>2.</b> mit Konservierungsstoff</div>
+        <div class="zusatz-item"><b>3.</b> mit Antioxidationsmittel</div>
+        <div class="zusatz-item"><b>4.</b> mit Geschmacksverstärker</div>
+        <div class="zusatz-item"><b>5.</b> geschwefelt</div>
+        <div class="zusatz-item"><b>6.</b> geschwärzt</div>
+        <div class="zusatz-item"><b>7.</b> gewachst</div>
+        <div class="zusatz-item"><b>8.</b> mit Phosphat</div>
+        <div class="zusatz-item"><b>9.</b> mit Säftigungsmittel</div>
+      </div>
+      <p style="padding:12px 16px 4px;font-size:0.85rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;border-top:1px solid var(--border);">Allergene</p>
+      <div class="info-grid">
+        <div class="info-item"><b>A</b> Glutenhaltig</div>
+        <div class="info-item"><b>B</b> Fisch</div>
+        <div class="info-item"><b>C</b> Krebstiere</div>
+        <div class="info-item"><b>D</b> Ei</div>
+        <div class="info-item"><b>E</b> Sellerie</div>
+        <div class="info-item"><b>F</b> Sesamsamen</div>
+        <div class="info-item"><b>G</b> Schwefeldioxid</div>
+        <div class="info-item"><b>H</b> Erdnüsse</div>
+        <div class="info-item"><b>I</b> Milch</div>
+        <div class="info-item"><b>J</b> Lupinen</div>
+        <div class="info-item"><b>K</b> Schalenfrüchte</div>
+        <div class="info-item"><b>L</b> Senf</div>
+        <div class="info-item"><b>M</b> Sojabohnen</div>
+      </div>
+      <p class="extra-note">Abbildungen ähnlich. Für Satz- und Druckfehler übernehmen wir keine Haftung. Irrtümer und Änderungen vorbehalten.</p>
+    </div>
+  </div>
+
+</div><!-- end menu-container -->
+
+<!-- ════ SPEISEKARTE ALS SCAN ════ -->
+<p class="section-title">Speisekarte als Scan</p>
+<div class="section-divider"></div>
+
+<div class="scans-section">
+  <div class="scans-grid">
+    <div class="scan-card">
+      <img src="assets/speisekarte_seite1.jpg" alt="Speisekarte Seite 1" onclick="openLightbox(this.src)"/>
+      <p>Seite 1 – zum Vergrößern klicken</p>
+    </div>
+    <div class="scan-card">
+      <img src="assets/speisekarte_seite2.jpg" alt="Speisekarte Seite 2" onclick="openLightbox(this.src)"/>
+      <p>Seite 2 – zum Vergrößern klicken</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <strong>Ali Bab'a – Kebap &amp; Pizza</strong><br/>
+  Olgastraße 1 · 89518 Heidenheim an der Brenz<br/>
+  <a href="tel:+49732131521 2">☎ 07321 – 31 52 12</a><br/><br/>
+  <span>✅ Halal &nbsp;|&nbsp; Vorbestellung möglich</span>
+  <div class="footer-links">
+    <a onclick="openModal('impressum')">Impressum</a>
+    <a onclick="openModal('datenschutz')">Datenschutzerklärung</a>
+  </div>
+  <p style="margin-top:14px;font-size:0.78rem;">© 2025 Ali Bab'a Kebap &amp; Pizza · Alle Preise inkl. MwSt.</p>
+</footer>
+
+<!-- ════ LIGHTBOX ════ -->
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Speisekarte Vollansicht"/>
+</div>
+
+<!-- ════ MODAL: IMPRESSUM ════ -->
+<div id="modal-impressum" class="modal-overlay" onclick="closeModalOutside(event,'modal-impressum')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('impressum')">&times;</button>
+    <h2>Impressum</h2>
+
+    <h3>Angaben gemäß § 5 TMG</h3>
+    <p>
+      <strong>Ali Bab'a Kebap &amp; Pizza</strong><br/>
+      Olgastraße 1<br/>
+      89518 Heidenheim an der Brenz
+    </p>
+
+    <h3>Kontakt</h3>
+    <p>
+      Telefon: 07321 – 31 52 12<br/>
+      E-Mail: <a href="mailto:info@alibaba-heidenheim.de" style="color:var(--red);">info@alibaba-heidenheim.de</a>
+    </p>
+
+    <h3>Verantwortlich für den Inhalt (§ 55 Abs. 2 RStV)</h3>
+    <p>
+      Inhaber: [Name des Inhabers]<br/>
+      Olgastraße 1, 89518 Heidenheim an der Brenz
+    </p>
+
+    <h3>Haftungsausschluss</h3>
+    <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir keine Gewähr. Preise und Angebote sind freibleibend und können sich jederzeit ändern.</p>
+
+    <h3>Streitschlichtung</h3>
+    <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" style="color:var(--red);">https://ec.europa.eu/consumers/odr</a>. Wir sind nicht bereit und nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+  </div>
+</div>
+
+<!-- ════ MODAL: DATENSCHUTZ ════ -->
+<div id="modal-datenschutz" class="modal-overlay" onclick="closeModalOutside(event,'modal-datenschutz')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('datenschutz')">&times;</button>
+    <h2>Datenschutzerklärung</h2>
+
+    <h3>1. Verantwortlicher</h3>
+    <p>
+      Ali Bab'a Kebap &amp; Pizza<br/>
+      Olgastraße 1, 89518 Heidenheim an der Brenz<br/>
+      Telefon: 07321 – 31 52 12<br/>
+      E-Mail: info@alibaba-heidenheim.de
+    </p>
+
+    <h3>2. Erhebung und Speicherung personenbezogener Daten</h3>
+    <p>Diese Website ist eine rein informative Visitenkartenseite. Es werden keine Formulare, Nutzerkonten, Newsletterdienste oder Tracking-Tools betrieben.</p>
+    <p>Es werden <strong>keine Cookies</strong> gesetzt und keine personenbezogenen Daten durch uns aktiv erhoben oder gespeichert.</p>
+
+    <h3>3. Server-Logfiles (GitHub Pages)</h3>
+    <p>Diese Website wird über <strong>GitHub Pages</strong> (GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, USA) gehostet. GitHub erhebt automatisch technische Zugriffsdaten (sog. Server-Logfiles), darunter:</p>
+    <ul>
+      <li>IP-Adresse des anfragenden Geräts</li>
+      <li>Datum und Uhrzeit des Zugriffs</li>
+      <li>Name der abgerufenen Seite</li>
+      <li>Übertragene Datenmenge und HTTP-Statuscode</li>
+    </ul>
+    <p>Diese Daten werden von GitHub verarbeitet. Weitere Informationen finden Sie in der <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer" style="color:var(--red);">Datenschutzerklärung von GitHub</a>.</p>
+
+    <h3>4. Ihre Rechte (DSGVO)</h3>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Widerspruch. Wenden Sie sich dazu an uns per E-Mail oder Telefon (siehe Impressum).</p>
+    <p>Beschwerderecht bei der Aufsichtsbehörde: <strong>Landesbeauftragter für den Datenschutz und die Informationsfreiheit Baden-Württemberg</strong>, <a href="https://www.baden-wuerttemberg.datenschutz.de" target="_blank" rel="noopener noreferrer" style="color:var(--red);">www.baden-wuerttemberg.datenschutz.de</a></p>
+
+    <h3>5. Aktualität</h3>
+    <p>Stand: April 2025. Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf anzupassen.</p>
+  </div>
+</div>
+
+<script>
+  /* ── Accordion ── */
+  function toggle(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.accordion-btn').forEach(b => b.classList.remove('active'));
+    if (!isOpen) {
+      body.classList.add('open');
+      btn.classList.add('active');
+      setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 80);
+    }
+  }
+
+  /* ── Lightbox ── */
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('show');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('show');
+  }
+
+  /* ── Modals ── */
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e, id) {
+    if (e.target === document.getElementById('modal-' + id)) closeModal(id);
+  }
+
+  /* ── Cookie Banner ── */
+  function dismissCookie() {
+    document.getElementById('cookie-banner').classList.add('hidden');
+    try { localStorage.setItem('cookie-ok','1'); } catch(e){}
+  }
+  (function(){
+    try { if (localStorage.getItem('cookie-ok')) dismissCookie(); } catch(e){}
+  })();
+
+  /* ── Keyboard ── */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeLightbox();
+      ['impressum','datenschutz'].forEach(closeModal);
+    }
+  });
+</script>
+
+</body>
+</html>
