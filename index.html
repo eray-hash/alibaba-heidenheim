@@ -65,10 +65,42 @@
 
     /* ── Header ── */
     header {
-      background: var(--card);
+      position: relative;
+      overflow: hidden;
       text-align: center;
       padding: 36px 20px 28px;
       border-bottom: 3px solid var(--red);
+      background: var(--card);
+    }
+
+    .header-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      z-index: 0;
+    }
+
+    .header-bg-panel {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.28) blur(2px);
+      transition: filter .4s;
+    }
+
+    .header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.35) 100%);
+      z-index: 1;
+    }
+
+    header > *:not(.header-bg):not(.header-overlay) {
+      position: relative;
+      z-index: 2;
     }
 
     header img.logo {
@@ -392,65 +424,6 @@
     }
     .modal-close:hover { color: var(--red); }
 
-    /* ── Food Showcase ── */
-    .food-showcase {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      height: 300px;
-      overflow: hidden;
-    }
-
-    .food-panel {
-      position: relative;
-      overflow: hidden;
-      cursor: default;
-    }
-
-    .food-panel img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .5s ease;
-      filter: brightness(0.72);
-    }
-
-    .food-panel:hover img {
-      transform: scale(1.07);
-      filter: brightness(0.85);
-    }
-
-    .food-panel-label {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-      padding: 28px 16px 16px;
-      text-align: center;
-    }
-
-    .food-panel-label span {
-      color: #fff;
-      font-size: 1.25rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-    }
-
-    .food-panel-label .red-line {
-      display: block;
-      width: 36px;
-      height: 3px;
-      background: var(--red);
-      margin: 6px auto 0;
-      border-radius: 2px;
-    }
-
-    @media (max-width: 600px) {
-      .food-showcase { height: 180px; }
-      .food-panel-label span { font-size: 0.9rem; letter-spacing: 1px; }
-    }
-
     /* ── Tel Button ── */
     .tel-btn {
       display: inline-flex;
@@ -607,6 +580,12 @@
 
 <!-- ════ HEADER ════ -->
 <header>
+  <div class="header-bg">
+    <div class="header-bg-panel" style="background-image:url('assets/pizza.png')"></div>
+    <div class="header-bg-panel" style="background-image:url('assets/doener.png')"></div>
+    <div class="header-bg-panel" style="background-image:url('assets/duerum.png')"></div>
+  </div>
+  <div class="header-overlay"></div>
   <img class="logo" src="assets/logo.png" alt="Ali Baba Kebap &amp; Pizza Logo"/>
   <h1>Ali Baba – Kebap &amp; Pizza</h1>
   <p class="tagline">Olgastraße 1 · 89518 Heidenheim an der Brenz</p>
@@ -620,31 +599,6 @@
   <span>🕐 Fr–Sa: 10:30–00:00 Uhr</span>
   <span>🕐 So: 12:00–22:00 Uhr</span>
   <span>📞 Vorbestellung möglich</span>
-</div>
-
-<!-- ════ FOOD SHOWCASE ════ -->
-<div class="food-showcase">
-  <div class="food-panel">
-    <img src="assets/pizza.png" alt="Pizza"/>
-    <div class="food-panel-label">
-      <span>Pizza</span>
-      <i class="red-line"></i>
-    </div>
-  </div>
-  <div class="food-panel">
-    <img src="assets/doener.png" alt="Döner"/>
-    <div class="food-panel-label">
-      <span>Döner</span>
-      <i class="red-line"></i>
-    </div>
-  </div>
-  <div class="food-panel">
-    <img src="assets/duerum.png" alt="Dürüm"/>
-    <div class="food-panel-label">
-      <span>Dürüm</span>
-      <i class="red-line"></i>
-    </div>
-  </div>
 </div>
 
 <!-- ════ SPEISEKARTE ════ -->
