@@ -3,9 +3,80 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ali Baba – Kebap &amp; Pizza Heidenheim</title>
-  <meta name="description" content="Ali Baba Kebap &amp; Pizza in Heidenheim an der Brenz – Olgastraße 1. Halal. Jetzt online die Speisekarte entdecken."/>
-  <meta name="keywords" content="Ali Baba, Kebap, Pizza, Heidenheim, Döner, Halal, Olgastraße"/>
+  <meta name="theme-color" content="#c0392b"/>
+  <title>Ali Baba – Kebap & Pizza Heidenheim · Döner · Halal · Olgastraße 1</title>
+  <meta name="description" content="Ali Baba Kebap &amp; Pizza in Heidenheim an der Brenz – Olgastraße 1. Halal-zertifiziert seit 1997. Döner, Pide, Pizza, Dürüm. Jetzt bestellen: 07321 – 31 52 12."/>
+  <meta name="keywords" content="Ali Baba Heidenheim, Kebap Heidenheim, Pizza Heidenheim, Döner Heidenheim, Halal Heidenheim, Olgastraße, Pide, Dürüm, Lahmacun, Restaurant Heidenheim an der Brenz"/>
+  <meta name="author" content="Ali Baba Kebap &amp; Pizza"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://alibaba-hdh.de/"/>
+
+  <!-- Open Graph (WhatsApp, Facebook) -->
+  <meta property="og:type" content="restaurant.restaurant"/>
+  <meta property="og:title" content="Ali Baba – Kebap & Pizza Heidenheim"/>
+  <meta property="og:description" content="Halal-Restaurant in Heidenheim seit 1997. Döner, Pide, Pizza, Dürüm. Olgastraße 1 · 07321 – 31 52 12"/>
+  <meta property="og:image" content="https://alibaba-hdh.de/assets/logo.png"/>
+  <meta property="og:url" content="https://alibaba-hdh.de/"/>
+  <meta property="og:locale" content="de_DE"/>
+  <meta property="og:site_name" content="Ali Baba Kebap &amp; Pizza"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Ali Baba – Kebap & Pizza Heidenheim"/>
+  <meta name="twitter:description" content="Halal-Restaurant in Heidenheim seit 1997. Döner, Pide, Pizza, Dürüm."/>
+  <meta name="twitter:image" content="https://alibaba-hdh.de/assets/logo.png"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png"/>
+  <link rel="apple-touch-icon" href="assets/logo.png"/>
+
+  <!-- Structured Data (Schema.org) - Restaurant -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Ali Baba Kebap & Pizza",
+    "image": "https://alibaba-hdh.de/assets/logo.png",
+    "url": "https://alibaba-hdh.de/",
+    "telephone": "+49-7321-315212",
+    "priceRange": "€",
+    "servesCuisine": ["Turkish", "Kebap", "Pizza", "Mediterranean"],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Olgastraße 1",
+      "addressLocality": "Heidenheim an der Brenz",
+      "postalCode": "89518",
+      "addressCountry": "DE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "48.6773",
+      "longitude": "10.1528"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+        "opens": "10:30",
+        "closes": "22:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday", "Saturday"],
+        "opens": "10:30",
+        "closes": "00:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "12:00",
+        "closes": "22:00"
+      }
+    ],
+    "foundingDate": "1997",
+    "acceptsReservations": "True"
+  }
+  </script>
 
   <style>
     /* ── Reset & Base ── */
@@ -635,7 +706,7 @@
 
 <!-- ════ COOKIE BANNER ════ -->
 <div id="cookie-banner">
-  <span>🍪 Diese Website verwendet <strong>keine Tracking-Cookies</strong> und erhebt keine personenbezogenen Daten. Serverprotokolle (IP, Zeitstempel) werden von GitHub Pages verarbeitet.
+  <span>🍪 Diese Website verwendet <strong>keine Tracking-Cookies</strong> und erhebt keine personenbezogenen Daten. Technisch notwendige Serverprotokolle (IP, Zeitstempel) werden vom Hosting-Anbieter verarbeitet.
   Mehr in unserer <a onclick="openModal('datenschutz')">Datenschutzerklärung</a>.</span>
   <button onclick="dismissCookie()">Verstanden</button>
 </div>
@@ -643,9 +714,9 @@
 <!-- ════ HEADER ════ -->
 <header>
   <div class="header-bg">
-    <div class="header-bg-panel" style="background-image:url('assets/pizza.png')"></div>
-    <div class="header-bg-panel" style="background-image:url('assets/doener.png')"></div>
-    <div class="header-bg-panel" style="background-image:url('assets/duerum.png')"></div>
+    <div class="header-bg-panel" style="background-image:url('assets/pizza.jpg')"></div>
+    <div class="header-bg-panel" style="background-image:url('assets/doener.jpg')"></div>
+    <div class="header-bg-panel" style="background-image:url('assets/duerum.jpg')"></div>
   </div>
   <div class="header-overlay"></div>
   <img class="logo" src="assets/logo.png" alt="Ali Baba Kebap &amp; Pizza Logo"/>
@@ -913,11 +984,11 @@
 <div class="scans-section">
   <div class="scans-grid">
     <div class="scan-card">
-      <img src="assets/speisekarte_seite2.jpg?v=5" alt="Speisekarte Seite 2" onclick="openLightbox(this.src)"/>
+      <img src="assets/speisekarte_seite2.jpg?v=6" alt="Speisekarte Seite 2 – Ali Baba Heidenheim" loading="lazy" onclick="openLightbox(this.src)"/>
       <p>Seite 1 – zum Vergrößern klicken</p>
     </div>
     <div class="scan-card">
-      <img src="assets/speisekarte_seite1.jpg?v=5" alt="Speisekarte Seite 1" onclick="openLightbox(this.src)"/>
+      <img src="assets/speisekarte_seite1.jpg?v=6" alt="Speisekarte Seite 1 – Ali Baba Heidenheim" loading="lazy" onclick="openLightbox(this.src)"/>
       <p>Seite 2 – zum Vergrößern klicken</p>
     </div>
   </div>
@@ -1022,12 +1093,12 @@
     <h3>Kontakt</h3>
     <p>
       Telefon: 07321 – 31 52 12<br/>
-      E-Mail: <a href="mailto:info@alibaba-heidenheim.de" style="color:var(--red);">info@alibaba-heidenheim.de</a>
+      E-Mail: <a href="mailto:info@alibaba-hdh.de" style="color:var(--red);">info@alibaba-hdh.de</a>
     </p>
 
     <h3>Verantwortlich für den Inhalt (§ 55 Abs. 2 RStV)</h3>
     <p>
-      Inhaber: [Name des Inhabers]<br/>
+      Inhaber: Mehmet Altunatmaz<br/>
       Olgastraße 1, 89518 Heidenheim an der Brenz
     </p>
 
@@ -1050,22 +1121,23 @@
       Ali Baba Kebap &amp; Pizza<br/>
       Olgastraße 1, 89518 Heidenheim an der Brenz<br/>
       Telefon: 07321 – 31 52 12<br/>
-      E-Mail: info@alibaba-heidenheim.de
+      E-Mail: info@alibaba-hdh.de
     </p>
 
     <h3>2. Erhebung und Speicherung personenbezogener Daten</h3>
     <p>Diese Website ist eine rein informative Visitenkartenseite. Es werden keine Formulare, Nutzerkonten, Newsletterdienste oder Tracking-Tools betrieben.</p>
     <p>Es werden <strong>keine Cookies</strong> gesetzt und keine personenbezogenen Daten durch uns aktiv erhoben oder gespeichert.</p>
 
-    <h3>3. Server-Logfiles (GitHub Pages)</h3>
-    <p>Diese Website wird über <strong>GitHub Pages</strong> (GitHub, Inc., 88 Colin P. Kelly Jr. St., San Francisco, CA 94107, USA) gehostet. GitHub erhebt automatisch technische Zugriffsdaten (sog. Server-Logfiles), darunter:</p>
+    <h3>3. Server-Logfiles (Hosting)</h3>
+    <p>Diese Website wird über <strong>ALL-INKL.COM – Neue Medien Münnich</strong> (Inh. René Münnich, Hauptstraße 68, 02742 Friedersdorf, Deutschland) gehostet. Der Hosting-Anbieter erhebt automatisch technische Zugriffsdaten (sog. Server-Logfiles), darunter:</p>
     <ul>
-      <li>IP-Adresse des anfragenden Geräts</li>
+      <li>IP-Adresse des anfragenden Geräts (anonymisiert)</li>
       <li>Datum und Uhrzeit des Zugriffs</li>
       <li>Name der abgerufenen Seite</li>
       <li>Übertragene Datenmenge und HTTP-Statuscode</li>
+      <li>Verwendeter Browser und Betriebssystem</li>
     </ul>
-    <p>Diese Daten werden von GitHub verarbeitet. Weitere Informationen finden Sie in der <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener noreferrer" style="color:var(--red);">Datenschutzerklärung von GitHub</a>.</p>
+    <p>Diese Daten werden ausschließlich zur Sicherstellung des technischen Betriebs verarbeitet und nach 7 Tagen automatisch gelöscht. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse am sicheren Betrieb der Website). Weitere Informationen in der <a href="https://all-inkl.com/datenschutzerklaerung/" target="_blank" rel="noopener noreferrer" style="color:var(--red);">Datenschutzerklärung von ALL-INKL.COM</a>.</p>
 
     <h3>4. Ihre Rechte (DSGVO)</h3>
     <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Widerspruch. Wenden Sie sich dazu an uns per E-Mail oder Telefon (siehe Impressum).</p>
